@@ -41,15 +41,7 @@ export class IconComponent extends IconBaseComponent implements OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    Object.keys(changes).map(attributeType => {
-      if (
-        attributeType
-        && changes[attributeType].currentValue
-        && changes[attributeType].currentValue !== changes[attributeType].previousValue
-      ) {
-        this.updateIcon();
-      }
-    });
+    this.updateIconOnChanges(changes);
   }
 
   /**
@@ -100,6 +92,14 @@ export class IconComponent extends IconBaseComponent implements OnChanges {
     }
 
     return null;
+  }
+
+  private updateIconOnChanges(changes: SimpleChanges): void {
+    Object.keys(changes).map(attributeType => {
+      if (attributeType && changes[attributeType].currentValue && changes[attributeType].currentValue !== changes[attributeType].previousValue) {
+        this.updateIcon();
+      }
+    });
   }
 
 }
